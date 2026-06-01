@@ -1,7 +1,7 @@
 {
   "name": "@pipeworx/mcp-datos-ar",
   "version": "0.1.0",
-  "description": "Argentina "Series de Tiempo" MCP — national time-series API (apis.datos.gob.ar).",
+  "description": "Argentina \'Series de Tiempo\' MCP — national time-series API (apis.datos.gob.ar).",
   "type": "module",
   "main": "src/index.ts",
   "types": "src/index.ts",

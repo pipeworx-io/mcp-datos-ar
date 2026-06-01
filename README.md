@@ -1,6 +1,6 @@
 # mcp-datos-ar
 
-Argentina "Series de Tiempo" MCP — national time-series API (apis.datos.gob.ar).
+Argentina \'Series de Tiempo\' MCP — national time-series API (apis.datos.gob.ar).
 
 Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 250+ live data sources.
 
