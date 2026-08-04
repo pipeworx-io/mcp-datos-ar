@@ -2,12 +2,14 @@
 
 Argentina "Series de Tiempo" MCP — national time-series API (apis.datos.gob.ar).
 
-Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 673+ live data sources.
+Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1394+ live data sources.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
+| `search_series` | Search Argentina's national time-series catalog (apis.datos.gob.ar) for series matching a keyword. Titles/descriptions are in Spanish (e.g. q="inflacion", "pbi", "emae", "tipo de cambio", "desempleo"). Returns matching series with their ids (use these with get_series), titles, units, frequency, date coverage, dataset and source. |
+| `get_series` | Fetch observations for one or more Argentine time series by id (ids come from search_series). Data is official Argentine statistics; titles are in Spanish. Pass multiple comma-separated ids to align several series on the same dates. Use collapse to resample (e.g. monthly→yearly avg) and representation_mode to transform values (e.g. percent change vs a year ago). Returns rows of [date, value, ...] plus metadata. |
 
 ## Quick Start
 
@@ -23,7 +25,7 @@ Add to your MCP client (Claude Desktop, Cursor, Windsurf, etc.):
 }
 ```
 
-Or connect to the full Pipeworx gateway for access to all 673+ data sources:
+Or connect to the full Pipeworx gateway for access to all 1394+ data sources:
 
 ```json
 {
@@ -47,7 +49,7 @@ The gateway picks the right tool and fills the arguments automatically.
 
 ## More
 
-- [All tools and guides](https://github.com/pipeworx-io/examples)
+- [Docs and guides](https://pipeworx.io/docs)
 - [pipeworx.io](https://pipeworx.io)
 
 ## License
