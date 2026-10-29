@@ -1,0 +1,102 @@
+[
+  {
+    "name": "search_series",
+    "description": "Search Argentina's national time-series catalog (apis.datos.gob.ar) for series matching a keyword. Titles/descriptions are in Spanish (e.g. q=\"inflacion\", \"pbi\", \"emae\", \"tipo de cambio\", \"desempleo\"). Returns matching series with their ids (use these with get_series), titles, units, frequency, date coverage, dataset and source.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string",
+          "description": "Search keyword in Spanish, e.g. \"inflacion\", \"pbi\", \"tipo de cambio\"."
+        },
+        "limit": {
+          "type": "number",
+          "description": "Max results to return (default 10)."
+        },
+        "offset": {
+          "type": "number",
+          "description": "Result offset for pagination (default 0)."
+        },
+        "dataset_theme": {
+          "type": "string",
+          "description": "Optional theme id filter, e.g. \"actividad\", \"precios\"."
+        },
+        "units": {
+          "type": "string",
+          "description": "Optional units filter, e.g. \"Porcentaje\"."
+        }
+      },
+      "required": [
+        "q"
+      ]
+    }
+  },
+  {
+    "name": "get_series",
+    "description": "Fetch observations for one or more Argentine time series by id (ids come from search_series). Data is official Argentine statistics; titles are in Spanish. Pass multiple comma-separated ids to align several series on the same dates. Use collapse to resample (e.g. monthly→yearly avg) and representation_mode to transform values (e.g. percent change vs a year ago). Returns rows of [date, value, ...] plus metadata.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "string",
+          "description": "One series id, or several comma-separated, e.g. \"143.3_NO_PR_2004_A_21\". From search_series."
+        },
+        "start_date": {
+          "type": "string",
+          "description": "Earliest date, ISO YYYY-MM-DD (optional)."
+        },
+        "end_date": {
+          "type": "string",
+          "description": "Latest date, ISO YYYY-MM-DD (optional)."
+        },
+        "limit": {
+          "type": "number",
+          "description": "Max rows to return (default 100, API max 1000)."
+        },
+        "collapse": {
+          "type": "string",
+          "enum": [
+            "month",
+            "quarter",
+            "year"
+          ],
+          "description": "Resample frequency, e.g. \"year\" to roll monthly data up to yearly."
+        },
+        "collapse_aggregation": {
+          "type": "string",
+          "enum": [
+            "avg",
+            "sum",
+            "end_of_period",
+            "min",
+            "max"
+          ],
+          "description": "How to aggregate when collapsing (default avg)."
+        },
+        "representation_mode": {
+          "type": "string",
+          "enum": [
+            "value",
+            "change",
+            "percent_change",
+            "change_a_year_ago",
+            "percent_change_a_year_ago"
+          ],
+          "description": "Value transform: raw value (default), period change, or change vs a year ago."
+        },
+        "metadata": {
+          "type": "string",
+          "enum": [
+            "none",
+            "simple",
+            "full"
+          ],
+          "description": "Metadata detail level (default simple)."
+        }
+      },
+      "required": [
+        "ids"
+      ]
+    }
+  }
+]
